@@ -7,13 +7,17 @@
 typedef struct Joueur Joueur;
 struct Joueur
 {
-
+    Grille* grille;
+    char* nom;
 };
 
 //Crée un joueur (rentre son nom)
-Joueur creerJoueur();
+Joueur* creerJoueur(char* nomJoueur);
+
+/*Fonction ajoutée pour désallouer l'objet*/
+void detruireJoueur(Joueur* joueur);
 
 //Retourne la grille d'un joueur
-Grille grille(Joueur joueur);
+Grille* grille(Joueur* joueur);
 
 #endif

@@ -1,18 +1,15 @@
 #ifndef RESULTAT_H
 #define RESULTAT_H
 
-#include <stdlib.h>
-#include <stdio.h>
-#include <stdbool.h>
+/*contient "en vue","touché","touché-coulé",ou "a l'eau"*/
+typedef enum Resultat Resultat;
+enum Resultat {TOUCHE, EN_VUE, RATE, COULE};
 
-//contient "en vue","touché","touché-coulé",ou "a l'eau"
-typedef struct Resultat Resultat;
-struct Resultat
-{
+/*Ces fonctions permettent de tester la valeur du résultat de tir*/
+int estTouche(Resultat* res);
+int estEnVue(Resultat* res);
+int estCoule(Resultat* res);
+int estRate(Resultat* res);
 
-};
-
-//affiche le résultat de tir
-Resultat afficheResultat(Resultat res);
 
 #endif
