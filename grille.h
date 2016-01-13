@@ -8,12 +8,12 @@
 typedef struct Grille Grille;
 struct Grille
 {
-    int taille;
+    Position* position;
+    Grille* suiteGrille;
 };
 
-//Crée une grille de bateaux
+//Allocation et désallocation d'une grille de bateaux
 Grille* creerGrille(int taille);
-
 void detruireGrille(Grille* grille);
 
 //Ajoute un bateau
@@ -25,7 +25,6 @@ Grille* supprimeBateau(Grille* grille);
 //execute un tir, regarde si le bateau est touché
 Grille* tir(Grille* grille);
 
-
 //Ajoute Position tirée
 Grille* ajoutePosition(Grille* grille, Position* position);
 
@@ -35,5 +34,6 @@ int aBateaux(Grille* grille);
 //Regarde si la position est valide (dans la grille)
 int estValide(Position* position, Grille* grille);
 
+Position* getPosition(Grille* grille);
 
 #endif

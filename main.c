@@ -4,6 +4,7 @@
 
 Position* entrerPosition();
 void afficherResultatPartie(Partie* partie);
+void demanderBateaux(Grille* grille);
 
 int main()
 {
@@ -13,6 +14,9 @@ int main()
 
     /*Cr�er un objet de type partie et l'initialise (nom des joueurs + placement bateaux)*/
     Partie* partie = creerPartie();
+
+    demanderBateaux(grille(joueur1(partie))); /*Demande les bateaux au joueur et les place sur sa grille*/
+    demanderBateaux(grille(joueur2(partie)));
 
     /*On fait boucler le  programme tant que les deux joueurs ont encore un(des) bateau(x)*/
     while(aBateaux(grille(joueur1(partie))) && aBateaux(grille(joueur2(partie))))
@@ -54,10 +58,54 @@ Position* entrerPosition()
 
 void afficherResultatPartie(Partie* partie)
 {
-    char* gagnant = ;
+    char *gagnant, *perdant;
 
     if(!aBateaux(grille(joueur1(partie))))
         gagnant = 2;
 
-    printf("Le joueur %d a gagné! :D")
+    printf("Le joueur %s a gagné! :D\n", gagnant);
+    printf("Le joueur %s a perdu! :(\n", perdant);
+}
+
+void demanderBateau(Joueur* joueur, int taille)
+{
+    char direction;
+    int isOk = 0;
+    Position *depart = NULL, *fin = NULL;
+
+    do
+    {
+        printf("Vous devez placer un bateau de taille %d\n", taille);
+
+        printf("Veuillez entrer une position de départ:\n");
+        depart = entrerPosition();
+
+        while(fin == NULL)
+        {
+            printf("Veuillez donner la direction du bateau (H/B/G/D):\n");
+            scanf("%c", &direction);
+
+            switch(direction)
+            {
+                case 'H':
+                    fin = creerPosition(X(depart), Y(depart)-taille);
+                    break;
+
+                case 'B':
+                    fin = creerPosition(X(depart), Y(depart)+taille);
+                    break;
+
+                case 'G':
+                    fin = creerPosition(X(depart)-taille, Y(depart));
+                    break;
+
+                case 'D':
+                    fin = creerPosition(X(depart) + taille, Y(depart));
+                    break;
+            }
+        }
+
+    }while(!estValide(fin, grille(joueur)));
+
+    ajouteBateau(grille(joueur));
 }
