@@ -10,6 +10,7 @@ struct Grille
 {
     Position* position;
     Grille* suiteGrille;
+    int taille;
 };
 
 //Allocation et désallocation d'une grille de bateaux
@@ -17,7 +18,7 @@ Grille* creerGrille(int taille);
 void detruireGrille(Grille* grille);
 
 //Ajoute un bateau
-Grille* ajouteBateau(Grille* grille);
+Grille* ajouteBateau(Grille* grille); //Rajout 
 
 //Supprime un bateau
 Grille* supprimeBateau(Grille* grille);

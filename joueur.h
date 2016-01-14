@@ -20,4 +20,5 @@ void detruireJoueur(Joueur* joueur);
 //Retourne la grille d'un joueur
 Grille* grille(Joueur* joueur);
 
+
 #endif

@@ -25,13 +25,13 @@ Partie setTourPartie(Partie* partie)
     return partie;
 }
 
-Partie* creerPartie()
+Partie* creerPartie(char* nomJoueurUn, char* nomJoueurDeux)
 {
     Partie* nouvellePartie = malloc(sizeof(Partie));
 
     nouvellePartie->tour = 0;
-    nouvellePartie->joueur1 = creerJoueur();
-    nouvellePartie->joueur2 = creerJoueur();
+    nouvellePartie->joueur1 = creerJoueur(nomJoueurUn);
+    nouvellePartie->joueur2 = creerJoueur(nomJoueurDeux);
 
     return nouvellePartie;
 }

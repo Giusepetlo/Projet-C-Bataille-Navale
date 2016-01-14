@@ -1,11 +1,12 @@
 #include "position.h"
 
-Position* creerPosition(int x, int y)
+Position* creerPosition(int x, int y, int idBateau)
 {
     Position nouvellePosition = malloc(sizeof(Position));
 
     nouvellePosition->x = x;
     nouvellePosition->y = y;
+    nouvellePosition->idBateau = idBateau;
 
     return nouvellePosition;
 }

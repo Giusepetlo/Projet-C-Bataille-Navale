@@ -8,32 +8,49 @@ void demanderBateaux(Grille* grille);
 
 int main()
 {
+    char nomJoueurUn[100], nomJoueurDeux[100];
+
     /*Afficher le bandereau de jeu*/
     printf("                     BATAILLE NAVALE");
     printf("                       version 1.0\n\n");
 
-    /*Cr�er un objet de type partie et l'initialise (nom des joueurs + placement bateaux)*/
-    Partie* partie = creerPartie();
+    /*Les noms devront être d'une taille inférieure à 99 lettres*/
+    printf("Entrez le nom du joueur 1:\n");
+    scanf("%s", &nomJoueurUn);
 
-    demanderBateaux(grille(joueur1(partie))); /*Demande les bateaux au joueur et les place sur sa grille*/
-    demanderBateaux(grille(joueur2(partie)));
+    printf("Entrez le nom du joueur:\n");
+    scanf("%s", &nomJoueurDeux);
+
+    /*Cr�er un objet de type partie et l'initialise (nom des joueurs + placement bateaux)*/
+    /*Problème = le placement des bateaux fait partie des entrées-sorties et ne doit pas être réalisé dans les classes métiers*/
+    Partie* partie = creerPartie(nomJoueurUn, nomJoueurDeux);
+
+    for(int i = 0; i < 6; i++)
+    {
+        demanderBateaux(grille(joueur1(partie)), i); /*Demande les bateaux au joueur et les place sur sa grille*/
+        demanderBateaux(grille(joueur2(partie)), i);
+    }
 
     /*On fait boucler le  programme tant que les deux joueurs ont encore un(des) bateau(x)*/
     while(aBateaux(grille(joueur1(partie))) && aBateaux(grille(joueur2(partie))))
     {
-
-        Position* cible = entrerPosition();
-
         //On regarde si un bateau est touch� et on affiche le r�sultat (partie.tour==0 => joueur 1 tir, partie.tour==1 => joueur 2 tir)
         if(tour(partie) == 0)
+        {
+            printf("C'est a %s de jouer\n", nomJoueurUn);
+            Position* cible = entrerPosition();
             tir(grille(joueur2(partie)), cible);
+        }
 
         else
+        {
+            printf("C'est a %s de jouer\n", nomJoueurDeux);
+            Position* cible = entrerPosition();
             tir(grille(joueur1(partie)), cible);
+        }
 
         //On change le tour du joueur
         setTourPartie(partie);
-
 
         //Pause + cleaner l'�cran
         system("PAUSE");
@@ -63,8 +80,8 @@ void afficherResultatPartie(Partie* partie)
     if(!aBateaux(grille(joueur1(partie))))
         gagnant = 2;
 
-    printf("Le joueur %s a gagné! :D\n", gagnant);
-    printf("Le joueur %s a perdu! :(\n", perdant);
+    printf("%s a gagné! :D\n", gagnant);
+    printf("%s a perdu! :(\n", perdant);
 }
 
 void demanderBateau(Joueur* joueur, int taille)
@@ -107,5 +124,5 @@ void demanderBateau(Joueur* joueur, int taille)
 
     }while(!estValide(fin, grille(joueur)));
 
-    ajouteBateau(grille(joueur));
+    ajouteBateau(grille(joueur), taille);
 }
